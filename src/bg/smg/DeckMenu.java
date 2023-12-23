@@ -9,7 +9,7 @@ public class DeckMenu extends JFrame {
     public DeckMenu() {
         setTitle("Memory Cards Game");
         setSize(800, 500);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLayout(null);
 
         JLabel deckLabel = new JLabel("Deck Menu");
@@ -52,9 +52,8 @@ public class DeckMenu extends JFrame {
         JButton valentinesButton = new JButton("St. Valentines");
         JButton tsvetnitsaButton = new JButton("Tsvetnitsa");
         JButton motherButton = new JButton("Mother's day");
-        JButton backButton = new JButton("Back");
+        // JButton backButton = new JButton("Back");
         JButton donateButton = new JButton("Donate");
-        JButton exitButton = new JButton("Exit");
 
         artistsButton.setBounds(50, 120, 170, 45);
         summerButton.setBounds(50, 175, 170, 45);
@@ -70,21 +69,13 @@ public class DeckMenu extends JFrame {
         tsvetnitsaButton.setBounds(275, 340, 170, 45);
         motherButton.setBounds(275, 395, 170, 45);
 
-        backButton.setBounds(550, 150, 170, 60);
+        // backButton.setBounds(550, 150, 170, 60);
         donateButton.setBounds(550, 250, 170, 60);
-        exitButton.setBounds(550, 350, 170, 60);
 
         donateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(DeckMenu.this, "Congratulations, you paid 100 dollars!");
-            }
-        });
-
-        exitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
             }
         });
 
@@ -100,10 +91,8 @@ public class DeckMenu extends JFrame {
         add(valentinesButton);
         add(tsvetnitsaButton);
         add(motherButton);
-        add(backButton);
+        // add(backButton);
         add(donateButton);
-        add(exitButton);
-
 
         setVisible(true);
 

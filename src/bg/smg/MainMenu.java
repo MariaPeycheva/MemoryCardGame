@@ -7,63 +7,86 @@ import java.awt.event.ActionListener;
 
 class MainMenu extends JFrame {
 
-    public MainMenu() {
-        setTitle("Memory Cards Game");
-        setSize(800, 500);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(null);
+	private JLabel titleLabel;
+	private JLabel playerNameLabel;
+	private JTextField playerNameTextField;
 
-        JLabel titleLabel = new JLabel("Memory Cards Game");
-        titleLabel.setBounds(200, 20, 400, 40);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 36));
-        add(titleLabel);
+	private JButton playButton;
 
-        JLabel nameLabel = new JLabel("Name:");
-        nameLabel.setBounds(200, 100, 100, 40);
-        nameLabel.setFont(new Font("Arial", Font.ITALIC, 30));
-        add(nameLabel);
+	private JButton newDeckButton;
+	private JButton donateButton;
+	private JButton exitButton;
 
-        JTextField nameTextField = new JTextField();
-        nameTextField.setBounds(320, 100, 200, 40);
-        add(nameTextField);
+	public MainMenu() {
+		setTitle("Memory Cards Game");
+		setSize(800, 600);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setLayout(null);
 
-        JButton newDeckButton = new JButton("New Deck");
-        JButton donateButton = new JButton("Donate");
-        JButton exitButton = new JButton("Exit");
+		titleLabel = new JLabel("Memory Cards Game");
+		titleLabel.setBounds(0, 0, 790, 126);
+		titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		titleLabel.setFont(new Font("Arial", Font.BOLD, 28));
+		getContentPane().add(titleLabel);
 
-        newDeckButton.setBounds(300, 200, 200, 60);
-        donateButton.setBounds(300, 280, 200, 60);
-        exitButton.setBounds(325, 380, 150, 40);
-        newDeckButton.setFont(new Font("Arial", Font.PLAIN, 22));
-        donateButton.setFont(new Font("Arial", Font.PLAIN, 22));
-        exitButton.setFont(new Font("Arial", Font.PLAIN, 18));
+		JPanel playerPanel = new JPanel();
+		playerPanel.setBounds(103, 138, 499, 36);
+		getContentPane().add(playerPanel);
+		playerPanel.setLayout(new GridLayout(1, 2, 0, 0));
 
-        newDeckButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //trqbva da se otvarq new Deck menuto
-            }
-        });
+		playerNameLabel = new JLabel("Player Name: ");
+		playerNameLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		playerPanel.add(playerNameLabel);
+		playerNameLabel.setFont(new Font("Arial", Font.ITALIC, 30));
 
-        donateButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(MainMenu.this, "Congratulations, you paid 100 dollars!");
-            }
-        });
+		playerNameTextField = new JTextField();
+		playerPanel.add(playerNameTextField);
 
-        exitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
+		JPanel buttonsPanel = new JPanel();
+		buttonsPanel.setBounds(184, 228, 418, 330);
+		buttonsPanel.setLayout(new GridLayout(4, 1, 0, 10));
 
-        add(newDeckButton);
-        add(donateButton);
-        add(exitButton);
+		playButton = new JButton("Play");
+		playButton.setFont(new Font("Dialog", Font.PLAIN, 22));
+		newDeckButton = new JButton("New Deck");
+		exitButton = new JButton("Exit");
 
-        setVisible(true);
-    }
+		newDeckButton.setBounds(0, 200, 200, 60);
+		exitButton.setBounds(325, 380, 150, 40);
+		newDeckButton.setFont(new Font("Arial", Font.PLAIN, 22));
+		exitButton.setFont(new Font("Arial", Font.PLAIN, 18));
 
+		exitButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+
+		buttonsPanel.add(playButton);
+		buttonsPanel.add(newDeckButton);
+		buttonsPanel.add(exitButton);
+
+		getContentPane().add(buttonsPanel);
+		donateButton = new JButton("Donate");
+		donateButton.setBounds(300, 280, 200, 60);
+		donateButton.setFont(new Font("Arial", Font.PLAIN, 22));
+
+		donateButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(MainMenu.this, "Congratulations, you paid 100 dollars!");
+			}
+		});
+
+		setVisible(true);
+	}
+
+	public JButton getPlayButton() {
+		return playButton;
+	}
+	
+	public JButton getNewDeckButton() {
+		return newDeckButton;
+	}
 }
