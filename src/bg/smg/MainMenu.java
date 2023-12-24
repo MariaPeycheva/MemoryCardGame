@@ -82,6 +82,11 @@ class MainMenu extends JFrame {
 		setVisible(true);
 	}
 
+	public String getPlayerName()
+	{
+		return playerNameTextField.getText();
+	}
+	
 	public JButton getPlayButton() {
 		return playButton;
 	}

@@ -9,6 +9,7 @@ public class Game {
     private Player player = null;
     private MainMenu mainMenu = null;
     private DeckMenu deckMenu = null;
+    private GameWindow gameWindow = null;
 
 
     public Game()
@@ -20,6 +21,8 @@ public class Game {
             public void actionPerformed(ActionEvent e) {
             	mainMenu.setVisible(false);
                 mainMenu.setEnabled(false);
+                
+                gameWindow = new GameWindow(mainMenu.getPlayerName());
             }
         });
         
