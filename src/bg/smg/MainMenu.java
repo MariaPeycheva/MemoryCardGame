@@ -13,7 +13,7 @@ class MainMenu extends JFrame {
 
 	private JButton playButton;
 
-	private JButton newDeckButton;
+	private JButton chooseDeckButton;
 	private JButton donateButton;
 	private JButton exitButton;
 
@@ -48,12 +48,13 @@ class MainMenu extends JFrame {
 
 		playButton = new JButton("Play");
 		playButton.setFont(new Font("Dialog", Font.PLAIN, 22));
-		newDeckButton = new JButton("New Deck");
+		chooseDeckButton = new JButton("Choose a Deck");
+		
 		exitButton = new JButton("Exit");
 
-		newDeckButton.setBounds(0, 200, 200, 60);
+		chooseDeckButton.setBounds(0, 200, 200, 60);
 		exitButton.setBounds(325, 380, 150, 40);
-		newDeckButton.setFont(new Font("Arial", Font.PLAIN, 22));
+		chooseDeckButton.setFont(new Font("Arial", Font.PLAIN, 22));
 		exitButton.setFont(new Font("Arial", Font.PLAIN, 18));
 
 		exitButton.addActionListener(new ActionListener() {
@@ -64,7 +65,7 @@ class MainMenu extends JFrame {
 		});
 
 		buttonsPanel.add(playButton);
-		buttonsPanel.add(newDeckButton);
+		buttonsPanel.add(chooseDeckButton);
 		buttonsPanel.add(exitButton);
 
 		getContentPane().add(buttonsPanel);
@@ -75,23 +76,22 @@ class MainMenu extends JFrame {
 		donateButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(MainMenu.this, "Congratulations, you paid 100 dollars!");
+				JOptionPane.showMessageDialog(MainMenu.this, "Thank you for your generous donation!");
 			}
 		});
 
 		setVisible(true);
 	}
 
-	public String getPlayerName()
-	{
+	public String getPlayerName() {
 		return playerNameTextField.getText();
 	}
-	
+
 	public JButton getPlayButton() {
 		return playButton;
 	}
-	
-	public JButton getNewDeckButton() {
-		return newDeckButton;
+
+	public JButton getChooseDeckButton() {
+		return chooseDeckButton;
 	}
 }
