@@ -1,60 +1,64 @@
 package bg.smg;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Font;
+import java.awt.Color;
 
-public class DeckMenu extends JFrame {
-    public DeckMenu() {
-        setTitle("Memory Cards Game");
-        setSize(800, 500);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLayout(null);
+public class DeckMenu {
 
-        JLabel deckLabel = new JLabel("Deck Menu");
-        deckLabel.setBounds(275, 20, 400, 40);
-        deckLabel.setFont(new Font("Arial", Font.BOLD, 36));
-        add(deckLabel);
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Deck Chooser");
+        frame.setSize(800, 500);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JLabel chooseDeckLabel = new JLabel("Choose a deck:");
-        chooseDeckLabel.setBounds(50, 70, 300, 40);
-        chooseDeckLabel.setFont(new Font("Arial", Font.PLAIN, 26));
-        add(chooseDeckLabel);
+        JPanel panel = new JPanel();
+        panel.setBackground(new Color(240, 240, 240));
+        frame.getContentPane().add(panel);
+        placeComponents(panel);
+        
+        JButton customDeck1Button = new JButton("");
+        customDeck1Button.setFont(new Font("Arial", Font.PLAIN, 18));
+        customDeck1Button.setBounds(317, 120, 170, 45);
+        panel.add(customDeck1Button);
+        
+        JButton customDeck2Button = new JButton("");
+     
+        
+        customDeck2Button.setFont(new Font("Arial", Font.PLAIN, 18));
+        customDeck2Button.setBounds(317, 175, 170, 45);
+        panel.add(customDeck2Button);
+        
+        JButton customDeck3Button = new JButton("");
+       
+        customDeck3Button.setFont(new Font("Arial", Font.PLAIN, 18));
+        customDeck3Button.setBounds(317, 230, 170, 45);
+        panel.add(customDeck3Button);
 
-        JLabel specialEditionLabel = new JLabel("Special edition:");
-        specialEditionLabel.setBounds(275, 70, 300, 40);
-        specialEditionLabel.setFont(new Font("Arial", Font.PLAIN, 26));
-        add(specialEditionLabel);
+ 
+        frame.setVisible(true);
+    }
 
-      /*ImageIcon artistsIcon = new ImageIcon("resources/artistsmain.png");
-        ImageIcon summerIcon = new ImageIcon("resources/summermain.png");
-        ImageIcon schoolIcon = new ImageIcon("resources/schoolmain.png");
-        ImageIcon animalsIcon = new ImageIcon("resources/animalsmain.png");
-        ImageIcon carsIcon = new ImageIcon("resources/carsmain.png");
-        ImageIcon disneyIcon = new ImageIcon("resources/disneymain.png");
-        ImageIcon christmasIcon = new ImageIcon("resources/schristmasmain.png");
-        ImageIcon easterIcon = new ImageIcon("resources/eastrermain.png");
-        ImageIcon halloweenIcon = new ImageIcon("resources/halloweenmain.png");
-        ImageIcon valentinesIcon = new ImageIcon("resources/valentinesmain.png");
-        ImageIcon tsvetnitsaIcon = new ImageIcon("resources/tsvetnitsamain.png");
-        ImageIcon motherIcon = new ImageIcon("resources/mothersmain.png");*/
+    private static void placeComponents(JPanel panel) {
+        panel.setLayout(null);
 
         JButton artistsButton = new JButton("Artists");
+        artistsButton.setFont(new Font("Arial", Font.PLAIN, 18));
         JButton summerButton = new JButton("Summer");
+        summerButton.setFont(new Font("Arial", Font.PLAIN, 18));
         JButton schoolButton = new JButton("School");
+        schoolButton.setFont(new Font("Arial", Font.PLAIN, 18));
         JButton animalsButton = new JButton("Animals");
+        animalsButton.setFont(new Font("Arial", Font.PLAIN, 18));
         JButton carsButton = new JButton("Cars");
+        carsButton.setFont(new Font("Arial", Font.PLAIN, 18));
         JButton disneyButton = new JButton("Disney");
-        JButton christmasButton = new JButton("Christmas");
-        JButton easterButton = new JButton("Easter");
-        JButton halloweenButton = new JButton("Halloween");
-        JButton valentinesButton = new JButton("St. Valentines");
-        JButton tsvetnitsaButton = new JButton("Tsvetnitsa");
-        JButton motherButton = new JButton("Mother's day");
-        // JButton backButton = new JButton("Back");
-        JButton donateButton = new JButton("Donate");
-
+        disneyButton.setFont(new Font("Arial", Font.PLAIN, 18));
+       
         artistsButton.setBounds(50, 120, 170, 45);
         summerButton.setBounds(50, 175, 170, 45);
         schoolButton.setBounds(50, 230, 170, 45);
@@ -62,39 +66,41 @@ public class DeckMenu extends JFrame {
         carsButton.setBounds(50, 340, 170, 45);
         disneyButton.setBounds(50, 395, 170, 45);
 
-        christmasButton.setBounds(275, 120, 170, 45);
-        easterButton.setBounds(275, 175, 170, 45);
-        halloweenButton.setBounds(275, 230, 170, 45);
-        valentinesButton.setBounds(275, 285, 170, 45);
-        tsvetnitsaButton.setBounds(275, 340, 170, 45);
-        motherButton.setBounds(275, 395, 170, 45);
+       
+     
+        JLabel chooseDeckLabel = new JLabel("Choose a Deck:");
+        chooseDeckLabel.setFont(new Font("Arial", Font.BOLD, 28));
+        chooseDeckLabel.setBounds(12, 30, 243, 65);
+        panel.add(chooseDeckLabel);
 
-        // backButton.setBounds(550, 150, 170, 60);
-        donateButton.setBounds(550, 250, 170, 60);
+        JLabel customDeckLabel = new JLabel("Custom Decks:");
+        customDeckLabel.setFont(new Font("Arial", Font.BOLD, 28));
+        customDeckLabel.setBounds(280, 40, 243, 45);
+        panel.add(customDeckLabel);
 
+ 
+        JButton createDeckButton = new JButton("Create New Deck");
+        createDeckButton.setFont(new Font("Dialog", Font.BOLD, 16));
+        createDeckButton.setBounds(547, 197, 208, 78);
+        panel.add(createDeckButton);
+
+        JButton donateButton = new JButton("Donate");
+        donateButton.setFont(new Font("Arial", Font.PLAIN, 18));
         donateButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(DeckMenu.this, "Congratulations, you paid 100 dollars!");
-            }
+        	public void actionPerformed(ActionEvent e) {
+        	}
         });
+        donateButton.setBounds(547, 298, 206, 78);
+        panel.add(donateButton);
 
-        add(artistsButton);
-        add(summerButton);
-        add(schoolButton);
-        add(animalsButton);
-        add(carsButton);
-        add(disneyButton);
-        add(christmasButton);
-        add(easterButton);
-        add(halloweenButton);
-        add(valentinesButton);
-        add(tsvetnitsaButton);
-        add(motherButton);
-        // add(backButton);
-        add(donateButton);
-
-        setVisible(true);
-
+        
+        panel.add(artistsButton);
+        panel.add(summerButton);
+        panel.add(schoolButton);
+        panel.add(animalsButton);
+        panel.add(carsButton);
+        panel.add(disneyButton);
+     
+        
     }
 }
