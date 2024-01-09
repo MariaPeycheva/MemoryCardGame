@@ -1,7 +1,11 @@
 package bg.smg;
 
 import javax.swing.*;
+
+import bg.smg.game.Deck;
+
 import java.awt.*;
+import java.util.ArrayList;
 
 public class GameWindow extends JFrame {
 	
@@ -9,29 +13,29 @@ public class GameWindow extends JFrame {
 	private JLabel nameLabel;
 	private JLabel scoreLabel;
 	private JLabel timeLabel;
-	private JPanel cardsPanel;
 	
-	public GameWindow(String playerName) {
+	private ArrayList<JButton> cardButtons;
+	private Deck deck;
+	
+	
+	public GameWindow(String playerName, Deck deck) {
+		this.deck = deck;
+		cardButtons = new ArrayList<JButton>();
+		cardButtons.ensureCapacity(20);
+		
 		setTitle("Cards");
-		setSize(800, 500);
+		setSize(800, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		SpringLayout springLayout = new SpringLayout();
-		getContentPane().setLayout(springLayout);
+		getContentPane().setLayout(null);
 
 		deckLabel = new JLabel("Cards");
+		deckLabel.setBounds(0, 0, 790, 31);
 		deckLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		springLayout.putConstraint(SpringLayout.NORTH, deckLabel, 0, SpringLayout.NORTH, getContentPane());
-		springLayout.putConstraint(SpringLayout.WEST, deckLabel, 0, SpringLayout.WEST, getContentPane());
-		springLayout.putConstraint(SpringLayout.SOUTH, deckLabel, 43, SpringLayout.NORTH, getContentPane());
-		springLayout.putConstraint(SpringLayout.EAST, deckLabel, 790, SpringLayout.WEST, getContentPane());
 		deckLabel.setFont(new Font("Arial", Font.BOLD, 36));
 		getContentPane().add(deckLabel);
 
 		JPanel labelsPanel = new JPanel();
-		springLayout.putConstraint(SpringLayout.NORTH, labelsPanel, 6, SpringLayout.SOUTH, deckLabel);
-		springLayout.putConstraint(SpringLayout.WEST, labelsPanel, 0, SpringLayout.WEST, getContentPane());
-		springLayout.putConstraint(SpringLayout.SOUTH, labelsPanel, 92, SpringLayout.NORTH, getContentPane());
-		springLayout.putConstraint(SpringLayout.EAST, labelsPanel, 790, SpringLayout.WEST, getContentPane());
+		labelsPanel.setBounds(0, 37, 790, 51);
 		getContentPane().add(labelsPanel);
 		labelsPanel.setLayout(new GridLayout(0, 3, 10, 0));
 
@@ -46,14 +50,106 @@ public class GameWindow extends JFrame {
 		timeLabel = new JLabel("Time: ");
 		labelsPanel.add(timeLabel);
 		timeLabel.setFont(new Font("Arial", Font.PLAIN, 26));
-
-		cardsPanel = new JPanel();
-		springLayout.putConstraint(SpringLayout.NORTH, cardsPanel, 6, SpringLayout.SOUTH, labelsPanel);
-		springLayout.putConstraint(SpringLayout.WEST, cardsPanel, 0, SpringLayout.WEST, deckLabel);
-		springLayout.putConstraint(SpringLayout.SOUTH, cardsPanel, -355, SpringLayout.SOUTH, getContentPane());
-		springLayout.putConstraint(SpringLayout.EAST, cardsPanel, -790, SpringLayout.EAST, getContentPane());
-		getContentPane().add(cardsPanel);
-		cardsPanel.setLayout(new GridLayout(1, 0, 0, 0));
+		
+		JButton btnCard1 = new JButton("");
+		btnCard1.setBounds(30, 100, 100, 100);
+		getContentPane().add(btnCard1);
+		cardButtons.add(btnCard1);
+		
+		JButton btnCard2 = new JButton("");
+		btnCard2.setBounds(190, 100, 100, 100);
+		getContentPane().add(btnCard2);
+		cardButtons.add(btnCard2);
+		
+		JButton btnCard3 = new JButton("");
+		btnCard3.setBounds(350, 100, 100, 100);
+		getContentPane().add(btnCard3);
+		cardButtons.add(btnCard3);
+		
+		JButton btnCard4 = new JButton("");
+		btnCard4.setBounds(510, 100, 100, 100);
+		getContentPane().add(btnCard4);
+		cardButtons.add(btnCard4);
+		
+		JButton btnCard5 = new JButton("");
+		btnCard5.setBounds(670, 100, 100, 100);
+		getContentPane().add(btnCard5);
+		cardButtons.add(btnCard5);
+		
+		JButton btnCard6 = new JButton("");
+		btnCard6.setBounds(30, 220, 100, 100);
+		getContentPane().add(btnCard6);
+		cardButtons.add(btnCard6);
+		
+		JButton btnCard7 = new JButton("");
+		btnCard7.setBounds(190, 220, 100, 100);
+		getContentPane().add(btnCard7);
+		cardButtons.add(btnCard7);
+		
+		JButton btnCard8 = new JButton("");
+		btnCard8.setBounds(350, 220, 100, 100);
+		getContentPane().add(btnCard8);
+		cardButtons.add(btnCard8);
+		
+		JButton btnCard9 = new JButton("");
+		btnCard9.setBounds(510, 220, 100, 100);
+		getContentPane().add(btnCard9);
+		cardButtons.add(btnCard9);
+		
+		JButton btnCard10 = new JButton("");
+		btnCard10.setBounds(670, 220, 100, 100);
+		getContentPane().add(btnCard10);
+		cardButtons.add(btnCard10);
+		
+		JButton btnCard11 = new JButton("");
+		btnCard11.setBounds(30, 340, 100, 100);
+		getContentPane().add(btnCard11);
+		cardButtons.add(btnCard11);
+		
+		JButton btnCard12 = new JButton("");
+		btnCard12.setBounds(190, 340, 100, 100);
+		getContentPane().add(btnCard12);
+		cardButtons.add(btnCard12);
+		
+		JButton btnCard13 = new JButton("");
+		btnCard13.setBounds(350, 340, 100, 100);
+		getContentPane().add(btnCard13);
+		cardButtons.add(btnCard13);
+		
+		JButton btnCard14 = new JButton("");
+		btnCard14.setBounds(510, 340, 100, 100);
+		getContentPane().add(btnCard14);
+		cardButtons.add(btnCard14);
+		
+		JButton btnCard15 = new JButton("");
+		btnCard15.setBounds(670, 340, 100, 100);
+		getContentPane().add(btnCard15);
+		cardButtons.add(btnCard15);
+		
+		JButton btnCard16 = new JButton("");
+		btnCard16.setBounds(30, 460, 100, 100);
+		getContentPane().add(btnCard16);
+		cardButtons.add(btnCard16);
+		
+		JButton btnCard17 = new JButton("");
+		btnCard17.setBounds(190, 460, 100, 100);
+		getContentPane().add(btnCard17);
+		cardButtons.add(btnCard17);
+		
+		JButton btnCard18 = new JButton("");
+		btnCard18.setBounds(350, 460, 100, 100);
+		getContentPane().add(btnCard18);
+		cardButtons.add(btnCard18);
+		
+		JButton btnCard19 = new JButton("");
+		btnCard19.setBounds(510, 460, 100, 100);
+		getContentPane().add(btnCard19);
+		cardButtons.add(btnCard19);
+		
+		JButton btnCard20 = new JButton("");
+		btnCard20.setBounds(670, 460, 100, 100);
+		getContentPane().add(btnCard20);
+		cardButtons.add(btnCard20);
 
 		setVisible(true);
 	}
@@ -66,5 +162,10 @@ public class GameWindow extends JFrame {
 	public void setRemainingTime(int seconds)
 	{
 		timeLabel.setText("Time: " + Integer.toString(seconds));
+	}
+	
+	public ArrayList<JButton> getCardButtons()
+	{
+		return this.cardButtons;
 	}
 }

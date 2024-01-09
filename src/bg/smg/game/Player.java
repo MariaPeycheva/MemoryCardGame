@@ -1,4 +1,4 @@
-package bg.smg;
+package bg.smg.game;
 
 public class Player {
     private String name;

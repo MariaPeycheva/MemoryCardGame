@@ -58,7 +58,7 @@ public class CustomDeckMenu extends JFrame {
 		getContentPane().add(deckNameTextField);
 
 		addCardButton = new JButton("Add Card");
-		addCardButton.setBounds(436, 54, 161, 48);
+		addCardButton.setBounds(578, 56, 161, 48);
 		getContentPane().add(addCardButton);
 		addCardButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -72,6 +72,7 @@ public class CustomDeckMenu extends JFrame {
 								addCardMenu.getCardIcon()));
 						
 							cardLabels[cards.size() - 1].setIcon(cards.get(cards.size() - 1).getIcon());
+							cardLabels[cards.size() - 1].setVisible(true);
 						}
 						addCardMenu.dispose();
 					}
@@ -79,7 +80,7 @@ public class CustomDeckMenu extends JFrame {
 
 			}
 		});
-		addCardButton.setFont(new Font("Arial", Font.PLAIN, 24));
+		addCardButton.setFont(new Font("Dialog", Font.BOLD, 12));
 
 		JLabel lblCard1 = new JLabel("");
 		lblCard1.setBounds(30, 160, 100, 100);
@@ -131,9 +132,18 @@ public class CustomDeckMenu extends JFrame {
 		getContentPane().add(lblCard10);
 		cardLabels[9] = lblCard10;
 		
+		for (JLabel cl : cardLabels)
+		{
+			cl.setVisible(false);
+			
+			
+		}
+		
 		btnFinishDeck = new JButton("Finish Deck");
-		btnFinishDeck.setBounds(335, 412, 125, 37);
+		btnFinishDeck.setBounds(434, 56, 132, 46);
 		getContentPane().add(btnFinishDeck);
+		
+		
 
 		this.setVisible(true);
 	}

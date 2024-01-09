@@ -29,80 +29,15 @@ public class DeckMenu extends JFrame {
 		getContentPane().add(chooseDeckLabel);
 		chooseDeckLabel.setFont(new Font("Arial", Font.BOLD, 28));
 
-		JLabel label = new JLabel("");
-		label.setBounds(284, 21, 0, 0);
-		getContentPane().add(label);
-
-		JLabel label_1 = new JLabel("");
-		label_1.setBounds(289, 21, 0, 0);
-		getContentPane().add(label_1);
-
 		createDeckButton = new JButton("Create New Deck");
 		createDeckButton.setBounds(294, 7, 190, 29);
 		getContentPane().add(createDeckButton);
 		createDeckButton.setFont(new Font("Dialog", Font.BOLD, 16));
 
-		JLabel label_2 = new JLabel("");
-		label_2.setBounds(489, 21, 0, 0);
-		getContentPane().add(label_2);
-
-		JLabel label_3 = new JLabel("");
-		label_3.setBounds(494, 21, 0, 0);
-		getContentPane().add(label_3);
-
-		JLabel label_4 = new JLabel("");
-		label_4.setBounds(499, 21, 0, 0);
-		getContentPane().add(label_4);
-
-		JLabel label_5 = new JLabel("");
-		label_5.setBounds(504, 21, 0, 0);
-		getContentPane().add(label_5);
-
-		JLabel label_6 = new JLabel("");
-		label_6.setBounds(509, 21, 0, 0);
-		getContentPane().add(label_6);
-
-		JLabel label_7 = new JLabel("");
-		label_7.setBounds(514, 21, 0, 0);
-		getContentPane().add(label_7);
-
-		JLabel label_8 = new JLabel("");
-		label_8.setBounds(519, 21, 0, 0);
-		getContentPane().add(label_8);
-
-		JLabel label_9 = new JLabel("");
-		label_9.setBounds(524, 21, 0, 0);
-		getContentPane().add(label_9);
-
 		JLabel customDeckLabel = new JLabel("Custom Decks:");
 		customDeckLabel.setBounds(529, 5, 235, 33);
 		getContentPane().add(customDeckLabel);
 		customDeckLabel.setFont(new Font("Arial", Font.BOLD, 28));
-
-		JButton artistsButton = new JButton("Artists");
-		artistsButton.setBounds(49, 43, 89, 32);
-		getContentPane().add(artistsButton);
-		artistsButton.setFont(new Font("Arial", Font.PLAIN, 18));
-		JButton summerButton = new JButton("Summer");
-		summerButton.setBounds(143, 43, 109, 32);
-		getContentPane().add(summerButton);
-		summerButton.setFont(new Font("Arial", Font.PLAIN, 18));
-		JButton schoolButton = new JButton("School");
-		schoolButton.setBounds(257, 43, 92, 32);
-		getContentPane().add(schoolButton);
-		schoolButton.setFont(new Font("Arial", Font.PLAIN, 18));
-		JButton animalsButton = new JButton("Animals");
-		animalsButton.setBounds(354, 43, 102, 32);
-		getContentPane().add(animalsButton);
-		animalsButton.setFont(new Font("Arial", Font.PLAIN, 18));
-		JButton carsButton = new JButton("Cars");
-		carsButton.setBounds(461, 43, 73, 32);
-		getContentPane().add(carsButton);
-		carsButton.setFont(new Font("Arial", Font.PLAIN, 18));
-		JButton disneyButton = new JButton("Disney");
-		disneyButton.setBounds(539, 43, 94, 32);
-		getContentPane().add(disneyButton);
-		disneyButton.setFont(new Font("Arial", Font.PLAIN, 18));
 
 		customDeck1Button = new JButton("");
 		customDeck1Button.setBounds(638, 54, 34, 10);
@@ -120,6 +55,30 @@ public class DeckMenu extends JFrame {
 		getContentPane().add(customDeck3Button);
 
 		customDeck3Button.setFont(new Font("Arial", Font.PLAIN, 18));
+		
+		JPanel panelDefaultDecks = new JPanel();
+		panelDefaultDecks.setBounds(10, 50, 283, 292);
+		getContentPane().add(panelDefaultDecks);
+				panelDefaultDecks.setLayout(new GridLayout(6, 1, 0, 20));
+		
+				JButton artistsButton = new JButton("Artists");
+				panelDefaultDecks.add(artistsButton);
+				artistsButton.setFont(new Font("Arial", Font.PLAIN, 18));
+				JButton summerButton = new JButton("Summer");
+				panelDefaultDecks.add(summerButton);
+				summerButton.setFont(new Font("Arial", Font.PLAIN, 18));
+				JButton schoolButton = new JButton("School");
+				panelDefaultDecks.add(schoolButton);
+				schoolButton.setFont(new Font("Arial", Font.PLAIN, 18));
+				JButton animalsButton = new JButton("Animals");
+				panelDefaultDecks.add(animalsButton);
+				animalsButton.setFont(new Font("Arial", Font.PLAIN, 18));
+				JButton carsButton = new JButton("Cars");
+				panelDefaultDecks.add(carsButton);
+				carsButton.setFont(new Font("Arial", Font.PLAIN, 18));
+				JButton disneyButton = new JButton("Disney");
+				panelDefaultDecks.add(disneyButton);
+				disneyButton.setFont(new Font("Arial", Font.PLAIN, 18));
 
 		this.setVisible(true);
 	}
@@ -127,5 +86,4 @@ public class DeckMenu extends JFrame {
 	public JButton getCreateDeckButton() {
 		return createDeckButton;
 	}
-
 }
