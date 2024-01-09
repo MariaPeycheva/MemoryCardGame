@@ -5,6 +5,8 @@ import javax.swing.*;
 import bg.smg.game.Deck;
 
 import java.awt.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class GameWindow extends JFrame {
@@ -151,6 +153,13 @@ public class GameWindow extends JFrame {
 		getContentPane().add(btnCard20);
 		cardButtons.add(btnCard20);
 
+		Path resourceDirectory = Paths.get("src","res");
+        String absolutePath = resourceDirectory.toFile().getAbsolutePath();
+        
+		
+		for(JButton b : cardButtons)
+			b.setIcon(new ImageIcon(absolutePath + "/default/card_back.png"));
+		
 		setVisible(true);
 	}
 	

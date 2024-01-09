@@ -59,38 +59,51 @@ public class Game {
                 		@Override
                 		public void actionPerformed(ActionEvent e)
                 		{
-                			if (selectedCards[0] < 0 || selectedCards[1] < 0)
-                			{
-                				int buttonIndex = cardButtons.indexOf(cb);
-                				if (selectedCards[0] < 0)
-                					selectedCards[0] = buttonIndex;
-                				else if (selectedCards[1] < 0)
-                					if (buttonIndex != selectedCards[0])
-                						selectedCards[1] = buttonIndex;
-                					else
-                						return;
-                				else
-                					return;
-                				
-                				cb.setIcon(cards.get(buttonIndex).getIcon());
-                				cb.updateUI();
-                				
-                				if (selectedCards[0] > -1 && selectedCards[1] > -1 && cards.get(selectedCards[0]).getName() == cards.get(selectedCards[1]).getName())
+                			int buttonIndex = cardButtons.indexOf(cb);
+                			cb.setIcon(cards.get(buttonIndex).getIcon()); // ne raboti poradi nqkva prichina za vtorata karta
+            				
+            				if (selectedCards[0] < 0)
+            				{
+            					selectedCards[0] = buttonIndex;
+            				}else if (selectedCards[1] < 0)
+            				{
+            					selectedCards[1] = buttonIndex;
+            				}
+            				
+            				if (selectedCards[0] > -1 && selectedCards[1] > -1)
+            				{
+            					if(cards.get(selectedCards[0]).getName() == cards.get(selectedCards[1]).getName())
                 				{
                 					player.setScore(player.getScore() + cards.get(selectedCards[0]).getPoints());
-                					cb.setVisible(false);
-                					cb.setEnabled(false);
-                					cardButtons.get(selectedCards[0]).setVisible(false);
+                					gameWindow.setScore(player.getScore());
+                					
                 					cardButtons.get(selectedCards[0]).setEnabled(false);
+                					cardButtons.get(selectedCards[0]).setVisible(false);
+                					cb.setEnabled(false);
+                					cb.setVisible(false);
                 					
                 					selectedCards[0] = -1;
                 					selectedCards[1] = -1;
                 					
-                					gameWindow.setScore(player.getScore());
-                					
                 				}
-                				
-                			}
+            					else
+            					{
+            						Path resourceDirectory = Paths.get("src","res");
+            				        String absolutePath = resourceDirectory.toFile().getAbsolutePath();
+            				        
+            				        try {
+										Thread.sleep(1000);
+									} catch (InterruptedException e1) {
+										// TODO Auto-generated catch block
+										e1.printStackTrace();
+									}
+            				        
+            						cardButtons.get(selectedCards[0]).setIcon(new ImageIcon(absolutePath + "/default/card_back.png"));
+            						cb.setIcon(new ImageIcon(absolutePath + "/default/card_back.png"));
+            						selectedCards[0] = -1;
+                					selectedCards[1] = -1;
+            					}
+            				}
                 		}
                 	});
                 }
