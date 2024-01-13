@@ -2,9 +2,13 @@ package bg.smg;
 
 import javax.swing.*;
 
+import bg.smg.game.Card;
 import bg.smg.game.Deck;
+import bg.smg.game.Player;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -17,19 +21,43 @@ public class GameWindow extends JFrame {
 	private JLabel timeLabel;
 	
 	private ArrayList<JButton> cardButtons;
+    private ArrayList<Card> cards;
+    private int[] selectedCards;
 	private Deck deck;
+	private Player player;
 	
 	
 	public GameWindow(String playerName, Deck deck) {
 		this.deck = deck;
+		player = new Player(playerName);
 		cardButtons = new ArrayList<JButton>();
 		cardButtons.ensureCapacity(20);
+    	
+    	cards = new ArrayList<Card>();
+    	cards.ensureCapacity(20);
+    	
+    	for (int i = 0; i < 10; ++i)
+    	{
+    		cards.add(deck.getCards().get(i));
+    		cards.add(deck.getCards().get(i));
+    	}
 		
+    	selectedCards = new int[2];
+    	selectedCards[0] = -1;
+    	selectedCards[1] = -1;
+		
+        initUI();
+		
+		setVisible(true);
+	}
+	
+	private void initUI()
+	{
 		setTitle("Cards");
 		setSize(800, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		getContentPane().setLayout(null);
-
+		getContentPane().setLayout(null);   
+		
 		deckLabel = new JLabel("Cards");
 		deckLabel.setBounds(0, 0, 790, 31);
 		deckLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -41,7 +69,7 @@ public class GameWindow extends JFrame {
 		getContentPane().add(labelsPanel);
 		labelsPanel.setLayout(new GridLayout(0, 3, 10, 0));
 
-		nameLabel = new JLabel("Name: " + playerName);
+		nameLabel = new JLabel("Name: " + this.player.getName());
 		labelsPanel.add(nameLabel);
 		nameLabel.setFont(new Font("Arial", Font.PLAIN, 26));
 
@@ -53,6 +81,11 @@ public class GameWindow extends JFrame {
 		labelsPanel.add(timeLabel);
 		timeLabel.setFont(new Font("Arial", Font.PLAIN, 26));
 		
+		initButtons();
+	}
+	
+	private void initButtons()
+	{
 		JButton btnCard1 = new JButton("");
 		btnCard1.setBounds(30, 100, 100, 100);
 		getContentPane().add(btnCard1);
@@ -152,15 +185,66 @@ public class GameWindow extends JFrame {
 		btnCard20.setBounds(670, 460, 100, 100);
 		getContentPane().add(btnCard20);
 		cardButtons.add(btnCard20);
-
+		
 		Path resourceDirectory = Paths.get("src","res");
         String absolutePath = resourceDirectory.toFile().getAbsolutePath();
-        
 		
 		for(JButton b : cardButtons)
 			b.setIcon(new ImageIcon(absolutePath + "/default/card_back.png"));
 		
-		setVisible(true);
+		for (JButton cb : cardButtons) {
+        	cb.addActionListener(new ActionListener() {
+        		@Override
+        		public void actionPerformed(ActionEvent e)
+        		{
+        			int buttonIndex = cardButtons.indexOf(cb);
+        			cb.setIcon(cards.get(buttonIndex).getIcon()); // ne raboti poradi nqkva prichina za vtorata karta
+    				
+    				if (selectedCards[0] < 0)
+    				{
+    					selectedCards[0] = buttonIndex;
+    				}else if (selectedCards[1] < 0)
+    				{
+    					selectedCards[1] = buttonIndex;
+    				}
+    				
+    				if (selectedCards[0] > -1 && selectedCards[1] > -1)
+    				{
+    					if(cards.get(selectedCards[0]).getName() == cards.get(selectedCards[1]).getName())
+        				{
+        					player.setScore(player.getScore() + cards.get(selectedCards[0]).getPoints());
+        					setScore(player.getScore());
+        					
+        					cardButtons.get(selectedCards[0]).setEnabled(false);
+        					cardButtons.get(selectedCards[0]).setVisible(false);
+        					cb.setEnabled(false);
+        					cb.setVisible(false);
+        					
+        					selectedCards[0] = -1;
+        					selectedCards[1] = -1;
+        					
+        				}
+    					else
+    					{
+    						Path resourceDirectory = Paths.get("src","res");
+    				        String absolutePath = resourceDirectory.toFile().getAbsolutePath();
+    				        
+    				        try {
+								Thread.sleep(1000);
+							} catch (InterruptedException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+    				        
+    						cardButtons.get(selectedCards[0]).setIcon(new ImageIcon(absolutePath + "/default/card_back.png"));
+    						cb.setIcon(new ImageIcon(absolutePath + "/default/card_back.png"));
+    						selectedCards[0] = -1;
+        					selectedCards[1] = -1;
+    					}
+    				}
+        		}
+        	});
+        }
 	}
 	
 	public void setScore(int score)
