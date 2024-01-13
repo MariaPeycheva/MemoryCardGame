@@ -23,12 +23,10 @@ public class GameWindow extends JFrame {
 	private ArrayList<JButton> cardButtons;
     private ArrayList<Card> cards;
     private int[] selectedCards;
-	private Deck deck;
 	private Player player;
 	
 	
 	public GameWindow(String playerName, Deck deck) {
-		this.deck = deck;
 		player = new Player(playerName);
 		cardButtons = new ArrayList<JButton>();
 		cardButtons.ensureCapacity(20);
@@ -198,7 +196,7 @@ public class GameWindow extends JFrame {
         		public void actionPerformed(ActionEvent e)
         		{
         			int buttonIndex = cardButtons.indexOf(cb);
-        			cb.setIcon(cards.get(buttonIndex).getIcon()); // ne raboti poradi nqkva prichina za vtorata karta
+        			cb.setIcon(cards.get(buttonIndex).getIcon()); // ne raboti za vtorata karta poradi nqkva prichina
     				
     				if (selectedCards[0] < 0)
     				{
@@ -215,10 +213,19 @@ public class GameWindow extends JFrame {
         					player.setScore(player.getScore() + cards.get(selectedCards[0]).getPoints());
         					setScore(player.getScore());
         					
-        					cardButtons.get(selectedCards[0]).setEnabled(false);
-        					cardButtons.get(selectedCards[0]).setVisible(false);
-        					cb.setEnabled(false);
-        					cb.setVisible(false);
+        					try {
+								Thread.sleep(1000);
+								
+	        					cardButtons.get(selectedCards[0]).setEnabled(false);
+	        					cardButtons.get(selectedCards[0]).setVisible(false);
+	        					cb.setEnabled(false);
+	        					cb.setVisible(false);
+	        					
+							} catch (InterruptedException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+
         					
         					selectedCards[0] = -1;
         					selectedCards[1] = -1;
@@ -231,15 +238,15 @@ public class GameWindow extends JFrame {
     				        
     				        try {
 								Thread.sleep(1000);
+								
+	    						cardButtons.get(selectedCards[0]).setIcon(new ImageIcon(absolutePath + "/default/card_back.png"));
+	    						cb.setIcon(new ImageIcon(absolutePath + "/default/card_back.png"));
+	    						selectedCards[0] = -1;
+	        					selectedCards[1] = -1;
 							} catch (InterruptedException e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
-    				        
-    						cardButtons.get(selectedCards[0]).setIcon(new ImageIcon(absolutePath + "/default/card_back.png"));
-    						cb.setIcon(new ImageIcon(absolutePath + "/default/card_back.png"));
-    						selectedCards[0] = -1;
-        					selectedCards[1] = -1;
     					}
     				}
         		}
@@ -257,8 +264,4 @@ public class GameWindow extends JFrame {
 		timeLabel.setText("Time: " + Integer.toString(seconds));
 	}
 	
-	public ArrayList<JButton> getCardButtons()
-	{
-		return this.cardButtons;
-	}
 }
