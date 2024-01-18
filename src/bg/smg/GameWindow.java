@@ -7,6 +7,8 @@ import bg.smg.game.Deck;
 import bg.smg.game.Player;
 
 import java.awt.*;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.nio.file.Path;
@@ -24,20 +26,23 @@ public class GameWindow extends JFrame {
     private ArrayList<Card> cards;
     private int[] selectedCards;
 	private Player player;
-	
+	private Deck deck;
+	private Timer timer;
+	private int remainingSeconds = 10;
 	
 	public GameWindow(String playerName, Deck deck) {
 		player = new Player(playerName);
 		cardButtons = new ArrayList<JButton>();
 		cardButtons.ensureCapacity(20);
+		this.deck = deck;
     	
     	cards = new ArrayList<Card>();
     	cards.ensureCapacity(20);
     	
     	for (int i = 0; i < 10; ++i)
     	{
-    		cards.add(deck.getCards().get(i));
-    		cards.add(deck.getCards().get(i));
+    		cards.add(this.deck.getCards().get(i));
+    		cards.add(this.deck.getCards().get(i));
     	}
 		
     	selectedCards = new int[2];
@@ -45,8 +50,19 @@ public class GameWindow extends JFrame {
     	selectedCards[1] = -1;
 		
         initUI();
-		
+        
 		setVisible(true);
+		
+		timer = new Timer();
+		
+		timer.scheduleAtFixedRate(new TimerTask() {
+
+			@Override
+			public void run() {
+				timerTick();
+				
+			}
+		}, 1000, 1000);
 	}
 	
 	private void initUI()
@@ -78,6 +94,7 @@ public class GameWindow extends JFrame {
 		timeLabel = new JLabel("Time: ");
 		labelsPanel.add(timeLabel);
 		timeLabel.setFont(new Font("Arial", Font.PLAIN, 26));
+		timeLabel.setText("Time: " + Integer.toString(remainingSeconds));
 		
 		initButtons();
 	}
@@ -254,14 +271,35 @@ public class GameWindow extends JFrame {
         }
 	}
 	
+	public String getPlayerName()
+	{
+		return player.getName();
+	}
+	
+	public Deck getDeck()
+	{
+		return deck;
+	}
+	
 	public void setScore(int score)
 	{
 		scoreLabel.setText("Score: " + Integer.toString(score));
 	}
 	
-	public void setRemainingTime(int seconds)
+	private void timerTick()
 	{
-		timeLabel.setText("Time: " + Integer.toString(seconds));
+		if(remainingSeconds > 0)
+		{
+			remainingSeconds -= 1;
+		}
+		else
+		{
+			this.setEnabled(false);
+			this.timer.cancel();
+			new GameOverWindow(player.getScore(), this);	
+		}
+		
+		timeLabel.setText("Time: " + Integer.toString(remainingSeconds));
 	}
 	
 }
