@@ -3,87 +3,89 @@ package bg.smg;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import bg.smg.game.Card;
+import bg.smg.game.Deck;
+
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
+import javax.swing.JComboBox;
 
 public class DeckMenu extends JFrame {
-	JButton customDeck1Button;
-	JButton customDeck2Button;
-	JButton customDeck3Button;
 	JButton createDeckButton;
+	CustomDeckMenu customDeckMenu = null;
+	JComboBox comboBoxDecks;
+	JButton btnFinish;
 
 	public DeckMenu() {
 		this.setTitle("Choose a Deck");
-		this.setSize(800, 500);
+		this.setSize(600, 200);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		getContentPane().setLayout(null);
 
 		JLabel chooseDeckLabel = new JLabel("Choose a Deck:");
-		chooseDeckLabel.setBounds(36, 5, 243, 33);
+		chooseDeckLabel.setBounds(41, 12, 243, 33);
 		getContentPane().add(chooseDeckLabel);
 		chooseDeckLabel.setFont(new Font("Arial", Font.BOLD, 28));
 
+		comboBoxDecks = new JComboBox();
+		comboBoxDecks.setMaximumRowCount(10);
+		comboBoxDecks.setBounds(302, 12, 254, 33);
+		comboBoxDecks.addItem(Deck.newAnimalDeck());
+		getContentPane().add(comboBoxDecks);
+
 		createDeckButton = new JButton("Create New Deck");
-		createDeckButton.setBounds(294, 7, 190, 29);
-		getContentPane().add(createDeckButton);
+		createDeckButton.setBounds(41, 57, 190, 33);
 		createDeckButton.setFont(new Font("Dialog", Font.BOLD, 16));
 
-		JLabel customDeckLabel = new JLabel("Custom Decks:");
-		customDeckLabel.setBounds(529, 5, 235, 33);
-		getContentPane().add(customDeckLabel);
-		customDeckLabel.setFont(new Font("Arial", Font.BOLD, 28));
+		createDeckButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (comboBoxDecks.getItemCount() >= 10)
+					return;
 
-		customDeck1Button = new JButton("");
-		customDeck1Button.setBounds(638, 54, 34, 10);
-		getContentPane().add(customDeck1Button);
-		customDeck1Button.setFont(new Font("Arial", Font.PLAIN, 18));
+				customDeckMenu = new CustomDeckMenu();
 
-		customDeck2Button = new JButton("");
-		customDeck2Button.setBounds(677, 54, 34, 10);
-		getContentPane().add(customDeck2Button);
+				customDeckMenu.getFinishDeckButton().addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						ArrayList<Card> cards = customDeckMenu.getCards();
 
-		customDeck2Button.setFont(new Font("Arial", Font.PLAIN, 18));
+						if (cards.size() != 10) {
+							JOptionPane.showMessageDialog(customDeckMenu, "The deck must have exactly 10 cards.");
+						} else {
 
-		customDeck3Button = new JButton("");
-		customDeck3Button.setBounds(716, 54, 34, 10);
-		getContentPane().add(customDeck3Button);
+							comboBoxDecks.addItem(new Deck(customDeckMenu.getDeckName(), cards));
+							customDeckMenu.dispose();
 
-		customDeck3Button.setFont(new Font("Arial", Font.PLAIN, 18));
-		
-		JPanel panelDefaultDecks = new JPanel();
-		panelDefaultDecks.setBounds(10, 50, 283, 292);
-		getContentPane().add(panelDefaultDecks);
-				panelDefaultDecks.setLayout(new GridLayout(6, 1, 0, 20));
-		
-				JButton artistsButton = new JButton("Artists");
-				panelDefaultDecks.add(artistsButton);
-				artistsButton.setFont(new Font("Arial", Font.PLAIN, 18));
-				JButton summerButton = new JButton("Summer");
-				panelDefaultDecks.add(summerButton);
-				summerButton.setFont(new Font("Arial", Font.PLAIN, 18));
-				JButton schoolButton = new JButton("School");
-				panelDefaultDecks.add(schoolButton);
-				schoolButton.setFont(new Font("Arial", Font.PLAIN, 18));
-				JButton animalsButton = new JButton("Animals");
-				panelDefaultDecks.add(animalsButton);
-				animalsButton.setFont(new Font("Arial", Font.PLAIN, 18));
-				JButton carsButton = new JButton("Cars");
-				panelDefaultDecks.add(carsButton);
-				carsButton.setFont(new Font("Arial", Font.PLAIN, 18));
-				JButton disneyButton = new JButton("Disney");
-				panelDefaultDecks.add(disneyButton);
-				disneyButton.setFont(new Font("Arial", Font.PLAIN, 18));
+						}
+					}
+				});
+			}
+		});
+
+		getContentPane().add(createDeckButton);
+
+		btnFinish = new JButton("Finish");
+		btnFinish.setBounds(41, 111, 190, 33);
+		getContentPane().add(btnFinish);
 
 		this.setVisible(true);
 	}
 
-	public JButton getCreateDeckButton() {
-		return createDeckButton;
+	public JButton getFinishButton() {
+		return btnFinish;
+	}
+
+	public Deck getSelectedDeck() {
+		return (Deck) comboBoxDecks.getSelectedObjects()[0];
 	}
 }

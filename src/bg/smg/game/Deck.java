@@ -72,4 +72,9 @@ public class Deck {
 	public ImageIcon getCardBackIcon() {
 		return this.getCardBackIcon();
 	}
+	
+	@Override
+	public String toString() {
+		return this.name;
+	}
 }

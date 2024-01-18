@@ -38,29 +38,15 @@ public class Main {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				deckMenu = new DeckMenu();
+				deckMenu.getFinishButton().addActionListener(new ActionListener() { // moqt nemezis
 
-				deckMenu.getCreateDeckButton().addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						customDeckMenu = new CustomDeckMenu();
-
-						customDeckMenu.getFinishDeckButton().addActionListener(new ActionListener() {
-							@Override
-							public void actionPerformed(ActionEvent e) {
-								ArrayList<Card> cards = customDeckMenu.getCards();
-
-								if (cards.size() != 10) {
-									JOptionPane.showMessageDialog(customDeckMenu,
-											"The deck must have exactly 10 cards.");
-								} else {
-									deck = new Deck(customDeckMenu.getDeckName(), cards);
-									customDeckMenu.dispose();
-								}
-							}
-						});
-					}
+						deck = deckMenu.getSelectedDeck();
+						deckMenu.dispose();
+					} 
+					
 				});
-
 			}
 		});
 	}

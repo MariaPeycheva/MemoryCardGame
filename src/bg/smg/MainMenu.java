@@ -48,13 +48,14 @@ class MainMenu extends JFrame {
 
 		playButton = new JButton("Play");
 		playButton.setFont(new Font("Dialog", Font.PLAIN, 22));
-		chooseDeckButton = new JButton("Choose a Deck");
 		
-		exitButton = new JButton("Exit");
-
-		chooseDeckButton.setBounds(0, 200, 200, 60);
-		exitButton.setBounds(325, 380, 150, 40);
+		chooseDeckButton = new JButton("Choose a Deck");
 		chooseDeckButton.setFont(new Font("Arial", Font.PLAIN, 22));
+		chooseDeckButton.setBounds(0, 200, 200, 60);
+		
+
+		exitButton = new JButton("Exit");
+		exitButton.setBounds(325, 380, 150, 40);
 		exitButton.setFont(new Font("Arial", Font.PLAIN, 18));
 
 		exitButton.addActionListener(new ActionListener() {
