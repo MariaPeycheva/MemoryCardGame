@@ -28,7 +28,8 @@ public class GameWindow extends JFrame {
 	private Player player;
 	private Deck deck;
 	private Timer timer;
-	private int remainingSeconds = 10;
+	private int remainingSeconds = 100;
+	private int cardsFound = 0;
 	
 	public GameWindow(String playerName, Deck deck) {
 		player = new Player(playerName);
@@ -203,6 +204,8 @@ public class GameWindow extends JFrame {
 		
 		Path resourceDirectory = Paths.get("src","res");
         String absolutePath = resourceDirectory.toFile().getAbsolutePath();
+        
+        GameWindow currentGameWindow = this;
 		
 		for(JButton b : cardButtons)
 			b.setIcon(new ImageIcon(absolutePath + "/default/card_back.png"));
@@ -229,6 +232,14 @@ public class GameWindow extends JFrame {
         				{
         					player.setScore(player.getScore() + cards.get(selectedCards[0]).getPoints());
         					setScore(player.getScore());
+        					cardsFound += 2;
+        					
+        					if (cardsFound == 20)
+        					{
+        						setEnabled(false);
+        						timer.cancel();
+        						new GameWonWindow(currentGameWindow);
+        					}
         					
         					try {
 								Thread.sleep(1000);
