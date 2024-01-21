@@ -241,18 +241,20 @@ public class GameWindow extends JFrame {
         						new GameWonWindow(currentGameWindow);
         					}
         					
-        					try {
-								Thread.sleep(1000);
+        					cardButtons.get(selectedCards[0]).setEnabled(false);
+        					cardButtons.get(selectedCards[0]).setVisible(false);
+        					cb.setEnabled(false);
+        					cb.setVisible(false);
+        					
+        					/*try {
+								//Thread.sleep(1000);
 								
-	        					cardButtons.get(selectedCards[0]).setEnabled(false);
-	        					cardButtons.get(selectedCards[0]).setVisible(false);
-	        					cb.setEnabled(false);
-	        					cb.setVisible(false);
+	        					
 	        					
 							} catch (InterruptedException e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
-							}
+							}*/
 
         					
         					selectedCards[0] = -1;
@@ -264,17 +266,19 @@ public class GameWindow extends JFrame {
     						Path resourceDirectory = Paths.get("src","res");
     				        String absolutePath = resourceDirectory.toFile().getAbsolutePath();
     				        
-    				        try {
+    				        cardButtons.get(selectedCards[0]).setIcon(new ImageIcon(absolutePath + "/default/card_back.png"));
+    						cb.setIcon(new ImageIcon(absolutePath + "/default/card_back.png"));
+    						selectedCards[0] = -1;
+        					selectedCards[1] = -1;
+    				        
+    				        /*try {
 								Thread.sleep(1000);
 								
-	    						cardButtons.get(selectedCards[0]).setIcon(new ImageIcon(absolutePath + "/default/card_back.png"));
-	    						cb.setIcon(new ImageIcon(absolutePath + "/default/card_back.png"));
-	    						selectedCards[0] = -1;
-	        					selectedCards[1] = -1;
+	    						
 							} catch (InterruptedException e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
-							}
+							}*/
     					}
     				}
         		}
